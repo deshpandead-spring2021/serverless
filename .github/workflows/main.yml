@@ -51,4 +51,3 @@ jobs:
             aws lambda update-function-code \
             --function-name  csye6225 \
             --zip-file fileb://serverless_artifact/${{ env.ARTIFACT_NAME }}
-            --file-exists-behavior OVERWRITE
