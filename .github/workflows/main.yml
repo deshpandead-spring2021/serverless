@@ -1,59 +1,54 @@
-name: Deploy to lambda
-on: workflow_dispatch
+
+name: Build and Deploy Lambda
+
+env:
+    ARTIFACT_NAME: csye6225-lambda.zip
+    AWS_REGION: us-east-1
+
+on:
+  workflow_dispatch:
 
 jobs:
-  deploy_source:
-
-    name: build and deploy lambda
-    strategy:
-      matrix:
-        node-version: [10.x]
+  lambda:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      
-      - name: install npm
-        run: npm install
 
-      - name: Configure AWS Credentials
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Deployment Artifact
+        run: |
+            echo 'inside_run'
+            pwd
+            ls
+            mkdir serverless_artifact
+            ls
+            pwd
+            zip -r ${{ env.ARTIFACT_NAME}} ./ 
+            pwd
+            ls -al
+            mv ${{ env.ARTIFACT_NAME}} serverless_artifact/
+            ls -al
+            pwd
+            cd serverless_artifact
+            pwd
+            ls -al
+            cd ..
+            pwd
+            ls -al
+        
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-
-      - name: Zip Artifact
+          aws-region: ${{ env.AWS_REGION }}
+        
+        
+      - name: Copy Artifact to S3
         run: | 
-          echo "current build number is ${{github.run_number}}"
-          pwd
-          ls -al
-          echo "present dir is"
-          mkdir csye6225-lambda
-            cd  csye6225-lambda
-            pwd
-            cp ../*.js .
-            pwd
-            zip -r csye6225-lambda.zip . -i csye6225-lambda
-            ls
-
-      - name: Upload Artifact to S3
-        run: |
-            pwd
-            ls -al
-            aws configure list
-            aws s3 cp csye6225-lamda.zip s3://${{secrets.S3_SERVERLESS_BUCKET}} --sse
-
+            aws s3 sync ./serverless_artifact s3://${{ secrets.S3_SERVERLESS_BUCKET}}
       - name: Lambda Update Call
         run: |
             aws lambda update-function-code \
             --function-name  csye6225 \
-            --output json \
-            --s3-location bucket=${{secrets.S3_SERVERLESS_BUCKET}},bundleType=zip,key=csye6225-lambda.zip
-            --file-exists-behavior OVERWRITE
-            echo $output
+            --zip-file fileb://serverless_artifact/${{ env.ARTIFACT_NAME }}
