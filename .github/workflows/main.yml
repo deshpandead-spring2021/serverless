@@ -39,7 +39,7 @@ jobs:
             pwd
             cp ../*.js .
             pwd
-            zip -r ../csye6225-lambda.zip *
+            zip -r csye6225-lambda.zip *
             ls
 
       - name: Upload Artifact to S3
