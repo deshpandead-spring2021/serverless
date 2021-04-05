@@ -45,10 +45,9 @@ jobs:
         
       - name: Copy Artifact to S3
         run: | 
-            aws s3 sync ./serverless_artifact s3://${{ secrets.S3_SERVERLESS_BUCKET}}
+            aws s3 cp ./serverless_artifact s3://${{ secrets.S3_SERVERLESS_BUCKET}}
       - name: Lambda Update Call
         run: |
             aws lambda update-function-code \
             --function-name  csye6225 \
             --zip-file fileb://serverless_artifact/${{ env.ARTIFACT_NAME }}
-            --file-exists-behavior OVERWRITE
