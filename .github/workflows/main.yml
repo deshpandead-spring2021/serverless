@@ -34,12 +34,12 @@ jobs:
           pwd
           ls -al
           echo "present dir is"
-          mkdir serverless
-            cd  serverless
+          mkdir csye6225
+            cd  csye6225
             pwd
             cp ../*.js .
             pwd
-            zip -r csye6225-lambda.zip *
+            zip -r csye6225-lambda.zip 
             ls
 
       - name: Upload Artifact to S3
