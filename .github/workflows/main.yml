@@ -38,9 +38,7 @@ jobs:
             cd  serverless
             pwd
             cp ../*.js .
-            cd nodejs-webapp
             pwd
-            cd ..
             zip -r ../csye6225-lambda.zip *
             ls
 
