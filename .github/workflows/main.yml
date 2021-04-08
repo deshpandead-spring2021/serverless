@@ -5,6 +5,7 @@ env:
  AWS_REGION: us-east-1
  CODEDEPLOY_APPLICATION_NAME: csye6225-lambda
  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: csye6225-lambda-deployment 
+ ARTIFACT_NAME: csye6225-lambda.zip
  
 on:
   workflow_dispatch:
@@ -28,7 +29,25 @@ jobs:
     
     - name: Build Deployment Artifact
       run: |
-          zip -r bundle.zip index.js
+            echo 'inside_run'
+            pwd
+            ls
+            mkdir serverless_artifact
+            ls
+            pwd
+            zip -r ${{ env.ARTIFACT_NAME}} ./ 
+            pwd
+            ls -al
+            mv ${{ env.ARTIFACT_NAME}} serverless_artifact/
+            ls -al
+            pwd
+            cd serverless_artifact
+            pwd
+            ls -al
+            cd ..
+            pwd
+            ls -al
+      
  
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
