@@ -78,7 +78,7 @@ exports.handler = (event, context, callback) => {
                                 '</head><body>' +
                                 'Hello,' +
                                 '<br><br>' +
-                                'A user has posted a new book.' +
+                                'You have made changes to book.' +
                                 '<br><br>' +
                                 'Below is the information of the posted book.' +
                                 '<br>'+
@@ -168,10 +168,10 @@ exports.handler = (event, context, callback) => {
     
    
     
-    //check answer text and answer id for N/A
+    //check bookid and link for N/A to verify if the book was deleted.
     
     function checkForDelete(){
-        if(message.answer_text =="N/A" && message.answer_id == "N/A" ){
+        if(message.title =="N/A" && message.LINK == "N/A" ){
            sendEmail();
            putDynamoAsync();
         }
