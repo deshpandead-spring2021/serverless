@@ -8,7 +8,7 @@ var ses = new AWS.SES({ region: "us-east-1" });
 
 const timetolive = 900;
 
-//Adding comments here to check if this is deployed.
+
 
 var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
     region: 'us-east-1'
@@ -17,11 +17,8 @@ var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
 var dynamodb = new AWS.DynamoDB();
 
 exports.handler = (event, context, callback) => {
-
-    checkForDelete();
   
     console.log(event.Records[0].Sns.Message);
-    console.log("Herererererer!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     
     
    var message = JSON.parse(event.Records[0].Sns.Message);
@@ -31,7 +28,7 @@ exports.handler = (event, context, callback) => {
 
     var parameter = {
         Item: {
-            'id': event.Records[0].Sns.MessageId,
+            'mid': event.Records[0].Sns.MessageId,
           'EMAIL_ADDRESS': message.email_address,
           'BOOKD_ID': message.bookid,
           'TITLE': message.title,
@@ -60,6 +57,8 @@ exports.handler = (event, context, callback) => {
     async function putDynamoAsync(){
         var inserter = await putIntoDynamo();
     }
+    
+    
 
     
     //send email function
@@ -79,7 +78,7 @@ exports.handler = (event, context, callback) => {
                                 '</head><body>' +
                                 'Hello,' +
                                 '<br><br>' +
-                                'You have made changes to book.' +
+                                'A user has posted a new book.' +
                                 '<br><br>' +
                                 'Below is the information of the posted book.' +
                                 '<br>'+
@@ -87,7 +86,7 @@ exports.handler = (event, context, callback) => {
                                 '<div>Email Address: </div>'+
                                 '<div>'+ message.email_address +'</div>'+
                                 '<br>' +
-                                '<div> Bookid: </div>'+
+                                '<div>: </div>'+
                                 '<div>'+ message.bookid +'</div>'+
                                 '<br>' +
                                 '<div> TITLE: </div>'+
@@ -104,7 +103,7 @@ exports.handler = (event, context, callback) => {
                                 '<br><br>' +
                                 'Regards' +
                                 '<br><br>' +
-                                'prod.adityadeshpande.me' +
+                                'CSYE6225' +
                                 '<br><br>' +
                                 +'</body></html>'
                         }
@@ -169,10 +168,10 @@ exports.handler = (event, context, callback) => {
     
    
     
-    //check bookid and link for N/A to verify if the book was deleted.
+    //check answer text and answer id for N/A
     
     function checkForDelete(){
-        if(message.title =="N/A" && message.LINK == "N/A" ){
+        if(message.answer_text =="N/A" && message.answer_id == "N/A" ){
            sendEmail();
            putDynamoAsync();
         }
@@ -183,7 +182,8 @@ exports.handler = (event, context, callback) => {
         }
     }
     
-  
+    checkForDelete();
+    
     
 
 }
