@@ -21,6 +21,7 @@ exports.handler = (event, context, callback) => {
     checkForDelete();
   
     console.log(event.Records[0].Sns.Message);
+    console.log("Herererererer!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     
     
    var message = JSON.parse(event.Records[0].Sns.Message);
