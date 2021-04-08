@@ -53,14 +53,13 @@ exports.handler = (event, context, callback) => {
         });
     }
     
-    ////////////////////////////////////////////////////////////////
-    
+
     async function putDynamoAsync(){
         var inserter = await putIntoDynamo();
     }
     
     
-    ///////////////////////////////////////////////////////////////
+
     
     //send email function
     function sendEmail(){
@@ -120,8 +119,7 @@ exports.handler = (event, context, callback) => {
         
     }
     
-    
-    /////////////////////////////////////////////////////////////
+
     
     //function to get from dynamo db
     function getFromDynamo(){
@@ -163,13 +161,12 @@ exports.handler = (event, context, callback) => {
      });
     }
     
-    //////////////////////////////////////////////////////////////
     
      async function getFromDynamoAsync(){
         var caller = await getFromDynamo();
     }
     
-    ///////////////////////////////////////////////////////////////
+   
     
     //check answer text and answer id for N/A
     
