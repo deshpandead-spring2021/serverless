@@ -29,24 +29,7 @@ jobs:
     
     - name: Build Deployment Artifact
       run: |
-            echo 'inside_run'
-            pwd
-            ls
-            mkdir serverless_artifact
-            ls
-            pwd
-            zip -r ${{ env.ARTIFACT_NAME}} ./ 
-            pwd
-            ls -al
-            mv ${{ env.ARTIFACT_NAME}} serverless_artifact/
-            ls -al
-            pwd
-            cd serverless_artifact
-            pwd
-            ls -al
-            cd ..
-            pwd
-            ls -al
+         zip -r csye6225-lambda.zip index.js
       
  
     - name: Configure AWS credentials
@@ -61,7 +44,7 @@ jobs:
           aws lambda get-alias --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --name developmentAlias > output.json 
           DEVELOPMENT_ALIAS_VERSION=$(cat output.json | jq -r '.FunctionVersion')
           echo $DEVELOPMENT_ALIAS_VERSION
-          aws lambda update-function-code --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --zip-file fileb://ARTIFACT_NAME --publish > output.json
+          aws lambda update-function-code --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --zip-file fileb://csye6225-lambda.zip --publish > output.json
           LATEST_VERSION=$(cat output.json | jq -r '.Version')
           echo $LATEST_VERSION
           cat > "appspec.yml" <<- EOM
