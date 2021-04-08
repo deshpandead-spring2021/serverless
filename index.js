@@ -28,7 +28,7 @@ exports.handler = (event, context, callback) => {
 
     var parameter = {
         Item: {
-            'mid': event.Records[0].Sns.MessageId,
+            'id': event.Records[0].Sns.MessageId,
           'EMAIL_ADDRESS': message.email_address,
           'BOOKD_ID': message.bookid,
           'TITLE': message.title,
