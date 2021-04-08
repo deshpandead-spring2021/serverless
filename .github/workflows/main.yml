@@ -20,6 +20,10 @@ jobs:
       - name: install npm
         run: npm install
 
+      - name: install sam cli
+        uses: advancedcsg-open/action-setup-sam@v1
+        run: sam --version
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -38,24 +42,9 @@ jobs:
             cd  serverless
             pwd
             cp ../*.js .
-            cd nodejs-webapp
             pwd
             cd ..
             zip -r ../csye6225-lambda.zip *
             ls
 
-      - name: Upload Artifact to S3
-        run: |
-            pwd
-            ls -al
-            aws configure list
-            aws s3 cp csye6225-lamda.zip s3://${{secrets.S3_SERVERLESS_BUCKET}} --sse
-
-      - name: Lambda Update Call
-        run: |
-            aws lambda update-function-code \
-            --function-name  csye6225 \
-            --output json \
-            --s3-location bucket=${{secrets.S3_SERVERLESS_BUCKET}},bundleType=zip,key=csye6225-lambda.zip
-            --file-exists-behavior OVERWRITE
-            echo $output
+     

@@ -28,7 +28,7 @@ exports.handler = (event, context, callback) => {
 
     var parameter = {
         Item: {
-            'mid': event.Records[0].Sns.MessageId,
+            'id': event.Records[0].Sns.MessageId,
           'EMAIL_ADDRESS': message.email_address,
           'BOOKD_ID': message.bookid,
           'TITLE': message.title,
@@ -53,16 +53,14 @@ exports.handler = (event, context, callback) => {
         });
     }
     
-    ////////////////////////////////////////////////////////////////
     
     async function putDynamoAsync(){
         var inserter = await putIntoDynamo();
     }
     
     
-    ///////////////////////////////////////////////////////////////
-    
-    //send email function
+
+    //send email
     function sendEmail(){
         
         var params = {
@@ -87,7 +85,7 @@ exports.handler = (event, context, callback) => {
                                 '<div>Email Address: </div>'+
                                 '<div>'+ message.email_address +'</div>'+
                                 '<br>' +
-                                '<div>: </div>'+
+                                '<div> BOOKID: </div>'+
                                 '<div>'+ message.bookid +'</div>'+
                                 '<br>' +
                                 '<div> TITLE: </div>'+
@@ -119,9 +117,6 @@ exports.handler = (event, context, callback) => {
             return ses.sendEmail(params).promise()
         
     }
-    
-    
-    /////////////////////////////////////////////////////////////
     
     //function to get from dynamo db
     function getFromDynamo(){
@@ -162,31 +157,10 @@ exports.handler = (event, context, callback) => {
               }        // successful response
      });
     }
+
     
-    //////////////////////////////////////////////////////////////
-    
-     async function getFromDynamoAsync(){
-        var caller = await getFromDynamo();
-    }
-    
-    ///////////////////////////////////////////////////////////////
-    
-    //check answer text and answer id for N/A
-    
-    function checkForDelete(){
-        if(message.answer_text =="N/A" && message.answer_id == "N/A" ){
-           sendEmail();
-           putDynamoAsync();
-        }
-        else{
-            getFromDynamoAsync();
-            putDynamoAsync();
-            
-        }
-    }
-    
-    checkForDelete();
-    
+ 
+
     
 
 }
