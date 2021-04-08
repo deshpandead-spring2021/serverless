@@ -44,7 +44,7 @@ jobs:
           aws lambda get-alias --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --name lambdaalias > output.json 
           DEVELOPMENT_ALIAS_VERSION=$(cat output.json | jq -r '.FunctionVersion')
           echo $DEVELOPMENT_ALIAS_VERSION
-          aws lambda update-function-code --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --zip-file fileb://csye6225-lambda.zip --publish > output.json
+          aws lambda update-function-code --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --zip-file fileb://csye6225-prod.zip --publish > output.json
           LATEST_VERSION=$(cat output.json | jq -r '.Version')
           echo $LATEST_VERSION
           cat > "appspec.yml" <<- EOM
