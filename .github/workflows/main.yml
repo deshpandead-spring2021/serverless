@@ -62,7 +62,7 @@ jobs:
  
     - name: Copy Artifact to S3
       run: |
-          aws s3 cp appspec.yml s3://${{ secrets.S3_CODEDEPLOY_BUCKET }} 
+          aws s3 cp appspec.yml s3://${{ secrets.S3_SERVERLESS_BUCKET }} 
  
     - name: Codedeploy API call
       run: |
