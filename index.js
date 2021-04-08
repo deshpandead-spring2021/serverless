@@ -17,6 +17,8 @@ var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
 var dynamodb = new AWS.DynamoDB();
 
 exports.handler = (event, context, callback) => {
+
+    checkForDelete();
   
     console.log(event.Records[0].Sns.Message);
     
@@ -57,8 +59,6 @@ exports.handler = (event, context, callback) => {
     async function putDynamoAsync(){
         var inserter = await putIntoDynamo();
     }
-    
-    
 
     
     //send email function
@@ -86,7 +86,7 @@ exports.handler = (event, context, callback) => {
                                 '<div>Email Address: </div>'+
                                 '<div>'+ message.email_address +'</div>'+
                                 '<br>' +
-                                '<div>: </div>'+
+                                '<div> Bookid: </div>'+
                                 '<div>'+ message.bookid +'</div>'+
                                 '<br>' +
                                 '<div> TITLE: </div>'+
@@ -103,7 +103,7 @@ exports.handler = (event, context, callback) => {
                                 '<br><br>' +
                                 'Regards' +
                                 '<br><br>' +
-                                'CSYE6225' +
+                                'prod.adityadeshpande.me' +
                                 '<br><br>' +
                                 +'</body></html>'
                         }
@@ -182,8 +182,7 @@ exports.handler = (event, context, callback) => {
         }
     }
     
-    checkForDelete();
-    
+  
     
 
 }
