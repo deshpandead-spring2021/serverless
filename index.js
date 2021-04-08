@@ -8,7 +8,7 @@ var ses = new AWS.SES({ region: "us-east-1" });
 
 const timetolive = 900;
 
-
+//Adding comments here to check if this is deployed.
 
 var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
     region: 'us-east-1'
