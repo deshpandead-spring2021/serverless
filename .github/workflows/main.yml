@@ -66,12 +66,11 @@ jobs:
  
     - name: Codedeploy API call
       run: |
-          REVISION=revisionType=S3,s3Location={bucket=${{ secrets.S3_CODEDEPLOY_BUCKET }},key=appspec.yml,bundleType=YAML}
+          REVISION=revisionType=S3,s3Location={bucket=${{ secrets.S3_SERVERLESS_BUCKET }},key=appspec.yml,bundleType=YAML}
           output=$(aws deploy create-deployment \
           --application-name ${{ env.CODEDEPLOY_APPLICATION_NAME }} \
           --deployment-group-name ${{ env.CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME}} \
           --deployment-config-name CodeDeployDefault.LambdaAllAtOnce \
-          --s3-location bucket=${{secrets.S3_SERVERLESS_BUCKET}},bundleType=zip,key=csye6225-lambda.zip \
           --revision $REVISION)
           echo $output
           deployment_id=$(echo $output | jq -r '.deploymentId')
