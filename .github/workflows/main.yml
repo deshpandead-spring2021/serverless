@@ -8,7 +8,9 @@ env:
  ARTIFACT_NAME: csye6225-lambda.zip
  
 on:
-  workflow_dispatch:
+   push:
+    branches: [ main ]
+ 
  
 jobs:
   build:
