@@ -41,7 +41,7 @@ jobs:
  
     - name: Update Lambda Function
       run: |
-          aws lambda get-alias --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --name developmentAlias > output.json 
+          aws lambda get-alias --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --name lambdaalias > output.json 
           DEVELOPMENT_ALIAS_VERSION=$(cat output.json | jq -r '.FunctionVersion')
           echo $DEVELOPMENT_ALIAS_VERSION
           aws lambda update-function-code --function-name ${{ env.DEPLOY_FUNCTION_NAME }} --zip-file fileb://csye6225-lambda.zip --publish > output.json
@@ -54,7 +54,7 @@ jobs:
           Type: AWS::Lambda::Function
           Properties:
           Name: "$DEPLOY_FUNCTION_NAME"
-          Alias: "development"
+          Alias: "lambdaalias"
           CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
           TargetVersion: $LATEST_VERSION
           EOM
