@@ -35,6 +35,10 @@ jobs:
             cd ..
             pwd
             ls -al
+            
+      - name: install sam cli
+        uses: advancedcsg-open/action-setup-sam@v1
+      
         
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
