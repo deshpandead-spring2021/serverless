@@ -1,9 +1,9 @@
 name: Deploy Lamda
  
 env: 
- DEPLOY_FUNCTION_NAME: SendEmail 
+ DEPLOY_FUNCTION_NAME: csye6225 
  AWS_REGION: us-east-1
- CODEDEPLOY_APPLICATION_NAME: csye6225-lambda-app
+ CODEDEPLOY_APPLICATION_NAME: csye6225-lambda
  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: csye6225-lambda-deployment 
  
 on:
