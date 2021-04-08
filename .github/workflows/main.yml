@@ -29,7 +29,7 @@ jobs:
     
     - name: Build Deployment Artifact
       run: |
-         zip -r csye6225-lambda.zip index.js
+         zip -r csye6225-prod.zip index.js
       
  
     - name: Configure AWS credentials
