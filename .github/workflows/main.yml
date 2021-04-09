@@ -56,7 +56,7 @@ jobs:
               Type: AWS::Lambda::Function
               Properties:
                 Name: "$DEPLOY_FUNCTION_NAME"
-                Alias: "development"
+                Alias: "lambdaalias"
                 CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
                 TargetVersion: $LATEST_VERSION
           EOM
