@@ -86,7 +86,7 @@ exports.handler = (event, context, callback) => {
                                 '<div>Email Address: </div>'+
                                 '<div>'+ message.email_address +'</div>'+
                                 '<br>' +
-                                '<div>: </div>'+
+                                '<div>BookID: </div>'+
                                 '<div>'+ message.bookid +'</div>'+
                                 '<br>' +
                                 '<div> TITLE: </div>'+
@@ -171,7 +171,7 @@ exports.handler = (event, context, callback) => {
     //check for delete message
     
     function checkForDelete(){
-        if(message.title =="N/A" || message.link == "N/A" ){
+        if(message.title =="N/A" && message.link == "N/A" ){
            sendEmail();
            putDynamoAsync();
         }
