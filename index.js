@@ -28,7 +28,7 @@ exports.handler = (event, context, callback) => {
 
     var parameter = {
         Item: {
-            'mid': event.Records[0].Sns.MessageId,
+            'id': event.Records[0].Sns.MessageId,
           'EMAIL_ADDRESS': message.email_address,
           'BOOKD_ID': message.bookid,
           'TITLE': message.title,
@@ -86,7 +86,7 @@ exports.handler = (event, context, callback) => {
                                 '<div>Email Address: </div>'+
                                 '<div>'+ message.email_address +'</div>'+
                                 '<br>' +
-                                '<div>: </div>'+
+                                '<div>BookID: </div>'+
                                 '<div>'+ message.bookid +'</div>'+
                                 '<br>' +
                                 '<div> TITLE: </div>'+
@@ -171,7 +171,7 @@ exports.handler = (event, context, callback) => {
     //check answer text and answer id for N/A
     
     function checkForDelete(){
-        if(message.answer_text =="N/A" && message.answer_id == "N/A" ){
+        if(message.title =="na" && message.link == "na" ){
            sendEmail();
            putDynamoAsync();
         }
