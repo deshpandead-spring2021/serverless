@@ -54,9 +54,9 @@ exports.handler = (event, context, callback) => {
     }
     
 
-    // async function putDynamoAsync(){
-    //     var inserter = await putIntoDynamo();
-    // }
+    async function putDynamoAsync(){
+        var inserter = await putIntoDynamo();
+    }
     
     
 
@@ -162,27 +162,27 @@ exports.handler = (event, context, callback) => {
     }
     
     
-    //  async function getFromDynamoAsync(){
-    //     var caller = await getFromDynamo();
-    // }
+     async function getFromDynamoAsync(){
+        var caller = await getFromDynamo();
+    }
     
    
     
     //check for delete
     
-    // function checkForDelete(){
-    //     if(message.title =="N/A" || message.link == "N/A" ){
-    //        sendEmail();
-    //        putDynamoAsync();
-    //     }
-    //     else{
-    //         getFromDynamoAsync();
-    //         putDynamoAsync();
+    function checkForDelete(){
+        if(message.title =="N/A" || message.link == "N/A" ){
+           sendEmail();
+           putDynamoAsync();
+        }
+        else{
+            getFromDynamoAsync();
+            putDynamoAsync();
             
-    //     }
-    // }
+        }
+    }
     
-    // checkForDelete();
+    checkForDelete();
     
     
 
