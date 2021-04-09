@@ -59,7 +59,7 @@ jobs:
               Alias: "lambdaalias"
               CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
               TargetVersion: $LATEST_VERSION
-            EOM
+          EOM
           cat appspec.yml 
  
     - name: Copy Artifact to S3
