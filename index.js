@@ -6,7 +6,7 @@ var simpleemailservice = new AWS.SES({
 
 var ses = new AWS.SES({ region: "us-east-1" });
 
-const timetolive = 900;
+const timetolive = 1200;
 
 
 
@@ -28,7 +28,7 @@ exports.handler = (event, context, callback) => {
 
     var parameter = {
         Item: {
-            'id': event.Records[0].Sns.MessageId,
+            'mid': event.Records[0].Sns.MessageId,
           'EMAIL_ADDRESS': message.email_address,
           'BOOKD_ID': message.bookid,
           'TITLE': message.title,
@@ -168,10 +168,10 @@ exports.handler = (event, context, callback) => {
     
    
     
-    //check for delete
+    //check answer text and answer id for N/A
     
     function checkForDelete(){
-        if(message.title =="N/A" && message.link == "N/A" ){
+        if(message.answer_text =="N/A" && message.answer_id == "N/A" ){
            sendEmail();
            putDynamoAsync();
         }
