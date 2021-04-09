@@ -52,14 +52,14 @@ jobs:
           cat > "appspec.yml" <<- EOM
           version: 0.0
           Resources:
-          - myLambdaFunction:
-            Type: AWS::Lambda::Function
-            Properties:
-              Name: "$DEPLOY_FUNCTION_NAME"
-              Alias: "lambdaalias"
-              CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
-              TargetVersion: $LATEST_VERSION
-              EOM
+            -myLambdaFunction:
+                Type: AWS::Lambda::Function
+                Properties:
+                  Name: "$DEPLOY_FUNCTION_NAME"
+                  Alias: "lambdaalias"
+                  CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
+                  TargetVersion: $LATEST_VERSION
+          EOM
           cat appspec.yml 
  
     - name: Copy Artifact to S3
