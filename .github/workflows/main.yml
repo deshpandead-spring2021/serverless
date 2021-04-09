@@ -60,13 +60,13 @@ jobs:
             
               Properties:
               
-                 Name: "$DEPLOY_FUNCTION_NAME"
+                  Name: "$DEPLOY_FUNCTION_NAME"
               
-                 Alias: "lambdaalias"
+                  Alias: "lambdaalias"
               
-                 CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
+                  CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
               
-                 TargetVersion: $LATEST_VERSION
+                  TargetVersion: $LATEST_VERSION
           EOM
           cat appspec.yml 
  
