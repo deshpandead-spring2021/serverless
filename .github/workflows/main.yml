@@ -50,28 +50,17 @@ jobs:
           LATEST_VERSION=$(cat output.json | jq -r '.Version')
           echo $LATEST_VERSION
           cat > "appspec.yml" <<- EOM
-          
           version: 0.0
-          
           Resources:
-          
-            - myLambdaFunction:
-          
+          - myLambdaFunction:
               Type: AWS::Lambda::Function
-          
               Properties:
-          
                 Name: "$DEPLOY_FUNCTION_NAME"
-          
                 Alias: "development"
-          
                 CurrentVersion: $DEVELOPMENT_ALIAS_VERSION
-          
                 TargetVersion: $LATEST_VERSION
-          
-                EOM
-          
-                cat appspec.yml 
+          EOM
+          cat appspec.yml 
  
  
     - name: Copy Artifact to S3
