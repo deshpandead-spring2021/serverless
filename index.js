@@ -171,7 +171,7 @@ exports.handler = (event, context, callback) => {
     //check for delete
     
     function checkForDelete(){
-        if(message.title =="N/A" || message.link == "N/A" ){
+        if(message.title =="N/A" && message.link == "N/A" ){
            sendEmail();
            putDynamoAsync();
         }
