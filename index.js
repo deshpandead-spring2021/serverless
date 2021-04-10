@@ -21,41 +21,51 @@ exports.handler = (event, context, callback) => {
     console.log(event.Records[0].Sns.Message);
     
     
-   var message = JSON.parse(event.Records[0].Sns.Message);
+//    var message = JSON.parse(event.Records[0].Sns.Message);
+    
+
+
+
+    
+    var message ={
+            'bookid':"1b10bb20-9a4e-11eb-bb8b-070c6b9ac5a1",
+            'email_address':"divyagirase90@gmail.com",
+            'title':"LOTR",
+            'author':"Tolkein",
+            'isbn':"978-548576564",
+            'link':"http://prod.adityadeshpande.me/books/1b10bb20-9a4e-11eb-bb8b-070c6b9ac5a1"
+    }
+
+
     console.log(message);
     
-    // var message1 ={
-    //         'id': 
 
-    // }
-    
-
-    // var parameter = {
-    //     Item: {
-    //         'id': event.Records[0].Sns.MessageId,
-    //       'EMAIL_ADDRESS': message.email_address,
-    //       'BOOKD_ID': message.bookid,
-    //       'TITLE': message.title,
-    //       'AUTHOR': message.author,
-    //       'ISBN':message.isbn,
-    //       'LINK': message.link
-    //     },
-    //     TableName: "csye6225"
-    // };
-
-
-        var parameter = {
+    var parameter = {
         Item: {
-            'id': "dc32d239-aea0-4fc2-b7d6-5e25cc53645",
-          'EMAIL_ADDRESS': "divyagirase90@gmail.com",
-          'BOOKD_ID': "8b8d2580-9a4b-11eb-964c-3f36c33dc368",
-          'TITLE': "LOTR",
-          'AUTHOR': "Tolkein",
-          'ISBN':"978-5485765090907",
-          'LINK': "http://prod.adityadeshpande.me/books/8b8d2580-9a4b-11eb-964c-3f36c33dc7eb"
+            'id': event.Records[0].Sns.MessageId,
+          'EMAIL_ADDRESS': message.email_address,
+          'BOOKD_ID': message.bookid,
+          'TITLE': message.title,
+          'AUTHOR': message.author,
+          'ISBN':message.isbn,
+          'LINK': message.link
         },
         TableName: "csye6225"
     };
+
+
+    //     var parameter = {
+    //     Item: {
+    //         'id': "dc32d239-aea0-4fc2-b7d6-5e25cc53645",
+    //       'EMAIL_ADDRESS': "divyagirase90@gmail.com",
+    //       'BOOKD_ID': "8b8d2580-9a4b-11eb-964c-3f36c33dc368",
+    //       'TITLE': "LOTR",
+    //       'AUTHOR': "Tolkein",
+    //       'ISBN':"978-5485765090907",
+    //       'LINK': "http://prod.adityadeshpande.me/books/8b8d2580-9a4b-11eb-964c-3f36c33dc7eb"
+    //     },
+    //     TableName: "csye6225"
+    // };
 
 
     
