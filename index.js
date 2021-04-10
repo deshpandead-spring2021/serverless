@@ -24,21 +24,41 @@ exports.handler = (event, context, callback) => {
    var message = JSON.parse(event.Records[0].Sns.Message);
     console.log(message);
     
+    // var message1 ={
+    //         'id': 
+
+    // }
     
 
-    var parameter = {
+    // var parameter = {
+    //     Item: {
+    //         'id': event.Records[0].Sns.MessageId,
+    //       'EMAIL_ADDRESS': message.email_address,
+    //       'BOOKD_ID': message.bookid,
+    //       'TITLE': message.title,
+    //       'AUTHOR': message.author,
+    //       'ISBN':message.isbn,
+    //       'LINK': message.link
+    //     },
+    //     TableName: "csye6225"
+    // };
+
+
+        var parameter = {
         Item: {
-            'id': event.Records[0].Sns.MessageId,
-          'EMAIL_ADDRESS': message.email_address,
-          'BOOKD_ID': message.bookid,
-          'TITLE': message.title,
-          'AUTHOR': message.author,
-          'ISBN':message.isbn,
-          'LINK': message.link
+            'id': "dc32d239-aea0-4fc2-b7d6-5e25cc53645",
+          'EMAIL_ADDRESS': "divyagirase90@gmail.com",
+          'BOOKD_ID': "8b8d2580-9a4b-11eb-964c-3f36c33dc368",
+          'TITLE': "LOTR",
+          'AUTHOR': "Tolkein",
+          'ISBN':"978-5485765090907",
+          'LINK': "http://prod.adityadeshpande.me/books/8b8d2580-9a4b-11eb-964c-3f36c33dc7eb"
         },
         TableName: "csye6225"
     };
 
+
+    
 
     //function to put into dynamo db
     function putIntoDynamo() {
