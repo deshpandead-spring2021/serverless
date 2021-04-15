@@ -9,6 +9,7 @@ var ses = new AWS.SES({ region: "us-east-1" });
 const timetolive = 1200;
 
 
+
 var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
     region: 'us-east-1'
 });
@@ -38,7 +39,6 @@ exports.handler = (event, context, callback) => {
         TableName: "csye6225"
     };
 
-    
 
     //function to put into dynamo db
     function putIntoDynamo() {
