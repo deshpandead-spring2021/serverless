@@ -9,7 +9,6 @@ var ses = new AWS.SES({ region: "us-east-1" });
 const timetolive = 1200;
 
 
-
 var DynamoDocClient = new AWS.DynamoDB.DocumentClient({
     region: 'us-east-1'
 });
@@ -21,10 +20,9 @@ exports.handler = (event, context, callback) => {
     console.log(event.Records[0].Sns.Message);
     
     
-  var message = JSON.parse(event.Records[0].Sns.Message);
-    
-
+   var message = JSON.parse(event.Records[0].Sns.Message);
     console.log(message);
+    
     
 
     var parameter = {
@@ -170,7 +168,7 @@ exports.handler = (event, context, callback) => {
     
    
     
-    //check answer text and answer id for N/A
+    //check title and link for na
     
     function checkForDelete(){
         if(message.title =="na" && message.link == "na" ){
